@@ -1,6 +1,6 @@
 package br.com.funcionalidades.login;
 
-import br.com.funcionalidades.acesso.MassaDados;
+import br.com.funcionalidades.dados.MassaDados;
 import br.com.funcionalidades.compra.ProdutosMaps;
 import br.com.funcionalidades.driver.DriverNavegador;
 import java.io.IOException;

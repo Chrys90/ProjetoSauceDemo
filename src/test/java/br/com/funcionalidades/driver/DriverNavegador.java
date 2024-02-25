@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class DriverNavegador {
@@ -15,11 +14,12 @@ public class DriverNavegador {
 
     static WebDriver driver;
 
-    public DriverNavegador() {
+    private static void iniciarChrome(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     }
 
     public static void visibilityOf(WebElement element) {
@@ -28,16 +28,18 @@ public class DriverNavegador {
 
     public static WebDriver getDriver() {
 
+        if (driver == null) {
+            iniciarChrome();
+        }
         return driver;
     }
 
-    public void acessarSite(String site) {
+    public static void acessarSite(String site) {
         driver.get(site);
     }
 
     public static void fecharNavegador() {
-        driver.quit();
-    }
-
+            driver.quit();
+        }
 
 }
