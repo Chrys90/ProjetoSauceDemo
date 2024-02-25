@@ -41,9 +41,14 @@ public class CompraMaps {
     @FindBy(xpath = "//span [text()='Your Cart']")
     public WebElement txtTituloCarrinhoDeCompras;
 
-    @FindBy(xpath = ".title")
+    @FindBy(css = ".title")
     public WebElement txtCheckout;
 
+    @FindBy(css = ".title")
+    public WebElement txtOverview;
+
+    @FindBy(css = ".title")
+    public WebElement txtCompraConcluida;
     public CompraMaps() {
         PageFactory.initElements(DriverNavegador.getDriver(), this);
     }
