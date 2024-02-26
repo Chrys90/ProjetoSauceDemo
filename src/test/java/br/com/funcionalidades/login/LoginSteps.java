@@ -10,10 +10,15 @@ import java.io.IOException;
 
 public class LoginSteps {
 
-    LoginPage loginPage;
+    LoginPage loginPage = new LoginPage();
     String username;
     String password;
     String produtos = "Products";
+    String erroUsername = "Epic sadface: Username is required";
+    String erroPassword = "Epic sadface: Password is required";
+    String usernameBlock;
+    String txtUsernameBlock = "Epic sadface: Sorry, this user has been locked out.";
+    String erroLogin = "Epic sadface: Username and password do not match any user in this service";
 
 
     @Dado("que esteja na pagina inicial")
@@ -23,9 +28,59 @@ public class LoginSteps {
 
     }
 
+    @Quando("informar os dados de login sem informar o usuario")
+    public void informarOsDadosDeLoginSemInformarOUsuario() throws IOException {
+        loginPage.setInpPassword(password);
+        loginPage.clickBtnLogin();
+
+    }
+
+    @Entao("deve exibir mensagem de erro informando que o username e obrigatorio")
+    public void deveExibirMensagemDeErroInformandoQueOUsernameEObrigatorio() {
+        Assert.assertEquals(erroUsername, loginPage.getErroUsername());
+    }
+
+    @Quando("informar os dados de login sem informar a senha")
+    public void informarOsDadosDeLoginSemInformarASenha() throws IOException {
+        loginPage.clickSetInpUsername();
+        loginPage.setInpUsername(username);
+        loginPage.clickBtnLogin();
+    }
+
+    @Entao("deve exibir mensagem de erro informando que o password e obrigatorio")
+    public void deveExibirMensagemDeErroInformandoQueOPasswordEObrigatorio() {
+        Assert.assertEquals(erroPassword, loginPage.getErroPassword());
+    }
+
+    @Quando("informar os dados de login de um usuario bloqueado")
+    public void informarOsDadosDeLoginDeUmUsuarioBloqueado() throws IOException {
+        loginPage.clickSetInpUsername();
+        loginPage.setInmpUsernameBlock(usernameBlock);
+        loginPage.setInpPassword(password);
+        loginPage.clickBtnLogin();
+    }
+
+    @Entao("deve exibir mensagem de erro informando que o usuario esta bloqueado")
+    public void deveExibirMensagemDeErroInformandoQueOUsuarioEstaBloqueado() {
+        Assert.assertEquals(txtUsernameBlock, loginPage.getErroUserBlock());
+    }
+
+    @Quando("informar os dados de login")
+    public void informarOsDadosDeLogin() throws IOException {
+        loginPage.clickSetInpUsername();
+        loginPage.setInpUsername(username);
+        loginPage.setPasswordIncorreto(erroPassword);
+        loginPage.clickBtnLogin();
+    }
+
+    @Entao("deve exibir mensagem de erro informando que o usuario e senha estão incorretos")
+    public void deveExibirMensagemDeErroInformandoQueOUsuarioESenhaEstãoIncorretos() {
+        Assert.assertEquals(erroLogin, loginPage.getLoginIncorreto());
+    }
+
+
     @Quando("informar login valido")
     public void informar_login_valido() throws IOException {
-        loginPage = new LoginPage();
         loginPage.clickSetInpUsername();
         loginPage.setInpUsername(username);
         loginPage.setInpPassword(password);
@@ -37,4 +92,5 @@ public class LoginSteps {
         Assert.assertEquals(produtos, loginPage.getUsuarioLogado());
 
     }
+
 }

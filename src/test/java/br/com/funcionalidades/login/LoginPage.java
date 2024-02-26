@@ -10,22 +10,25 @@ public class LoginPage {
 
     ProdutosMaps produtosMaps;
 
-    LoginMaps loginMaps;
-    MassaDados massadados;
+    LoginMaps loginMaps = new LoginMaps();
+    MassaDados massadados = new MassaDados();
 
     public void clickBtnLogin() {
         loginMaps.btnLogin.click();
     }
 
     public void clickSetInpUsername() {
-        loginMaps = new LoginMaps();
         loginMaps.inpUsername.click();
     }
 
     public void setInpUsername(String username) throws IOException {
-        massadados = new MassaDados();
         username = MassaDados.getUsername();
         loginMaps.inpUsername.sendKeys(username);
+    }
+
+    public void setInmpUsernameBlock(String usernameBlock) throws IOException {
+        usernameBlock = MassaDados.getUsernameBlock();
+        loginMaps.inpUsername.sendKeys(usernameBlock);
     }
 
     public void setInpPassword(String password) throws IOException {
@@ -34,10 +37,35 @@ public class LoginPage {
         loginMaps.inpPassword.sendKeys(password);
     }
 
+    public void setPasswordIncorreto(String passwordIncorreto) throws IOException {
+        passwordIncorreto = MassaDados.getPasswordIncorreto();
+        loginMaps.inpPassword.click();
+        loginMaps.inpPassword.sendKeys(passwordIncorreto);
+    }
+
     public String getUsuarioLogado() {
         produtosMaps = new ProdutosMaps();
         DriverNavegador.visibilityOf(produtosMaps.txtProduto);
         return produtosMaps.txtProduto.getText();
     }
 
+    public String getErroUsername(){
+       DriverNavegador.visibilityOf(loginMaps.txtErroUsername);
+       return loginMaps.txtErroUsername.getText();
+    }
+
+    public String getErroPassword(){
+        DriverNavegador.visibilityOf(loginMaps.txtErroPassword);
+        return loginMaps.txtErroPassword.getText();
+    }
+
+    public String getErroUserBlock(){
+        DriverNavegador.visibilityOf(loginMaps.txtUserBlock);
+        return loginMaps.txtUserBlock.getText();
+    }
+
+    public String getLoginIncorreto(){
+        DriverNavegador.visibilityOf(loginMaps.txtErroLogin);
+        return  loginMaps.txtErroLogin.getText();
+    }
 }

@@ -21,7 +21,8 @@ public class MassaDados {
         String firstName; // Variavel que guardara o primeiro nome do cliente no checkout
         String lastName; // Variavel que guardara o ultimo nome do cliente no checkout
         String zipCode; // Variavel que guardara o codigo postal do cliente no checkout
-
+        String usernameBlock; // Variavel que guardara o usuario bloqueado
+        String passwordErro; // Variavel que guardara a senha incorreta
 
         Properties prop = getProp();
 
@@ -30,9 +31,19 @@ public class MassaDados {
         firstName = prop.getProperty("first.name");
         lastName = prop.getProperty("last.name");
         zipCode =  prop.getProperty("zip.code");
+        usernameBlock = prop.getProperty("username.locked");
+        passwordErro = prop.getProperty("password.test");
     }
     public static String getUsername() throws IOException {
         return getProp().getProperty("username.standard");
+    }
+
+    public static String getPasswordIncorreto() throws IOException {
+        return getProp().getProperty("password.test");
+    }
+
+    public static String getUsernameBlock() throws IOException {
+        return  getProp().getProperty("username.locked");
     }
 
     public static String getPassword() throws IOException {
