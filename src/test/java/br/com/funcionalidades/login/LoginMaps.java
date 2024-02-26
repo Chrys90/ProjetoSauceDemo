@@ -22,5 +22,17 @@ public class LoginMaps {
     @FindBy(css = "#login-button")
     WebElement btnLogin;
 
+    @FindBy(xpath = "//*[contains(text(), 'Epic sadface: Password is required')]")
+    WebElement txtErroPassword;
+
+    @FindBy(xpath = "//*[contains(text(), 'Epic sadface: Username is required')]")
+    WebElement txtErroUsername;
+
+    @FindBy(xpath = "//*[contains(text(), 'Epic sadface: Sorry, this user has been locked out.')]")
+    WebElement txtUserBlock;
+
+    @FindBy(xpath = "//*[contains(text(), 'Epic sadface: Username and password do not match any user in this service')]")
+    WebElement txtErroLogin;
+
 
 }
