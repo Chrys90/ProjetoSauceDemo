@@ -12,7 +12,6 @@ public class LoginMaps {
         PageFactory.initElements(DriverNavegador.getDriver(), this);
     }
 
-
     @FindBy(css = "#user-name")
     WebElement inpUsername;
 

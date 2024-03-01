@@ -3,6 +3,7 @@ package br.com.funcionalidades.login;
 import br.com.funcionalidades.dados.MassaDados;
 import br.com.funcionalidades.compra.ProdutosMaps;
 import br.com.funcionalidades.driver.DriverNavegador;
+
 import java.io.IOException;
 
 
@@ -49,23 +50,23 @@ public class LoginPage {
         return produtosMaps.txtProduto.getText();
     }
 
-    public String getErroUsername(){
-       DriverNavegador.visibilityOf(loginMaps.txtErroUsername);
-       return loginMaps.txtErroUsername.getText();
+    public String getErroUsername() {
+        DriverNavegador.visibilityOf(loginMaps.txtErroUsername);
+        return loginMaps.txtErroUsername.getText();
     }
 
-    public String getErroPassword(){
+    public String getErroPassword() {
         DriverNavegador.visibilityOf(loginMaps.txtErroPassword);
         return loginMaps.txtErroPassword.getText();
     }
 
-    public String getErroUserBlock(){
+    public String getErroUserBlock() {
         DriverNavegador.visibilityOf(loginMaps.txtUserBlock);
         return loginMaps.txtUserBlock.getText();
     }
 
-    public String getLoginIncorreto(){
+    public String getLoginIncorreto() {
         DriverNavegador.visibilityOf(loginMaps.txtErroLogin);
-        return  loginMaps.txtErroLogin.getText();
+        return loginMaps.txtErroLogin.getText();
     }
 }
