@@ -13,13 +13,14 @@ import org.junit.runner.RunWith;
         tags = "",
         glue = "br.com.funcionalidades",
         plugin = {"json:target/reports/CucumberReports.json", "pretty"},
+        monochrome = true,
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 public class RunnerTest {
 
+
     @AfterClass
     public static void fechaNavegador() {
-        System.out.println("Fechando navegador...");
         DriverNavegador.fecharNavegador();
     }
 
