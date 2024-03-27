@@ -2,7 +2,7 @@
 @compras
 Funcionalidade: Compra de produto
 
-  @carrinhoDeCompras
+  @carrinho-compras
   Cenario: Adicionar produto no carrinho de compras
     Dado que esteja na pagina de produtos
     Quando clicar em um produto
@@ -14,12 +14,12 @@ Funcionalidade: Compra de produto
     Quando clicar em checkout
     Entao deve ser apresentado a tela para incluir informacoes do cliente
 
-   @informacoesCliente
+   @informacoes-cliente
   Cenario: Incluir informacoes do cliente no pedido
     Dado que esteja na tela de informacoes do cliente
     Quando preencher as informacoes e clicar em Continue
     Entao deve ser apresentado a tela de confirmacao do pedido
-  @finalizarCompra
+  @finalizar-compra
   Cenario: Finalizar compra do cliente
     Dado que estja na tela de confirmacao do pedido
     Quando clicar em Finish

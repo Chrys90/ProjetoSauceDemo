@@ -31,18 +31,18 @@ jobs:
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
       - name: Run test
-        run: mvn install -Dtest=RunnerTest -Dbrowser=chrome -Dcucumber.options="--tags @loginComSucesso"
+        run: mvn test -Dtest=RunnerTest -Dbrowser=chrome -Dcucumber.filter.tags="@login-sucesso"
 
       - name: Gerar relatório
         if: always()
-        run: mvn mvn net.masterthought:maven-cucumber-reporting:3.14.0:generate
+        run: mvn cluecumber-report:reporting
 
       - name: Arquivar relatório
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: report-tests
-          path: '**/reports/'
+          path: '**/formated-report/'
 
       - name: Enviar notificação Slack - Sucesso
         if: ${{ success() }}
