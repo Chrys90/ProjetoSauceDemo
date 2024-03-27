@@ -1,7 +1,7 @@
 package br.com.funcionalidades.compra;
 
 import br.com.funcionalidades.dados.MassaDados;
-import br.com.funcionalidades.driver.DriverNavegador;
+import br.com.funcionalidades.utils.Commands;
 
 import java.io.IOException;
 
@@ -14,72 +14,64 @@ public class CompraPage {
 
     public void selecionarProduto(){
         produtosMaps = new ProdutosMaps();
-        DriverNavegador.visibilityOf(produtosMaps.txtProduto);
-        produtosMaps.btnComprarMochila.click();
-        produtosMaps.btnComprarLanternaBike.click();
-        produtosMaps.btnComprarCamisaPreta.click();
-        produtosMaps.btnComprarJaqueta.click();
-        produtosMaps.btnComprarMacacaoInfantil.click();
-        produtosMaps.btnComprarCamisaVermelha.click();
+        Commands.waitElementBeVisible(produtosMaps.txtProduto, 10000);
+        Commands.clique(produtosMaps.btnComprarMochila);
+        Commands.clique(produtosMaps.btnComprarLanternaBike);
+        Commands.clique(produtosMaps.btnComprarCamisaPreta);
+        Commands.clique(produtosMaps.btnComprarJaqueta);
+        Commands.clique(produtosMaps.btnComprarMacacaoInfantil);
+        Commands.clique(produtosMaps.btnComprarCamisaVermelha);
     }
 
     public void carrinhoDeCompras() {
-        compraMaps.btnCarrinhoDeCompras.click();
-        try { Thread.sleep (600); } catch (InterruptedException falha) {}
+        Commands.clique(compraMaps.btnCarrinhoDeCompras);
     }
 
-    public String validarTelaCarrinhoDeCompras()  {
-        DriverNavegador.visibilityOf(compraMaps.txtTituloCarrinhoDeCompras);
-        return compraMaps.txtTituloCarrinhoDeCompras.getText();
-
+    public void validarTelaCarrinhoDeCompras()  {
+        Commands.validarMensagem(compraMaps.txtTituloCarrinhoDeCompras,"Your Cart");
     }
 
     public void clicarBtnCheckout(){
-        compraMaps.btnCheckout.click();
+        Commands.clique(compraMaps.btnCheckout);
     }
 
-    public String validarTelaCheckout(){
-        DriverNavegador.visibilityOf(compraMaps.txtCheckout);
-        return compraMaps.txtCheckout.getText();
+    public void validarTelaCheckout(){
+        Commands.validarMensagem(compraMaps.txtCheckout,"Checkout: Your Information");
     }
 
-    public void SetInpFirstName(String firstName) throws IOException {
+    public void preencherFirstName() throws IOException {
         massaDados = new MassaDados();
-        firstName = MassaDados.getFirstName();
-        compraMaps.inpFirstName.sendKeys(firstName);
+        String firstName = MassaDados.getFirstName();
+        Commands.preencherCampo(compraMaps.inpFirstName, firstName);
+    }
+
+    public void preencherLastName() throws IOException {
+        massaDados = new MassaDados();
+        String lastname = MassaDados.getLastName();
+        Commands.preencherCampo(compraMaps.inpLastName, lastname);
 
     }
 
-    public void SetInpLastName(String lastname) throws IOException {
+    public void preencherZipCode() throws IOException {
         massaDados = new MassaDados();
-        lastname = MassaDados.getLastName();
-        compraMaps.inpLastName.sendKeys(lastname);
-
-    }
-
-    public void SetInpZipCode(String zipcode) throws IOException {
-        massaDados = new MassaDados();
-        zipcode = MassaDados.getZipCode();
-        compraMaps.inpCodigoPostal.sendKeys(zipcode);
-
+        String zipcode = MassaDados.getZipCode();
+        Commands.preencherCampo(compraMaps.inpCodigoPostal, zipcode);
     }
 
     public void clicarBtnContiuar(){
-        compraMaps.btnContinuar.click();
+        Commands.clique(compraMaps.btnContinuar);
     }
 
-    public String validarTelaOverview(){
-        DriverNavegador.visibilityOf(compraMaps.txtOverview);
-        return compraMaps.txtOverview.getText();
+    public void validarTelaOverview(){
+        Commands.validarMensagem(compraMaps.txtOverview, "Checkout: Overview");
     }
 
     public void clicarBtnFinish(){
-        compraMaps.btnFinalizarCompra.click();
+        Commands.clique(compraMaps.btnFinalizarCompra);
     }
 
-    public String validarCompraConcluida(){
-        DriverNavegador.visibilityOf(compraMaps.txtCompraConcluida);
-        return compraMaps.txtCompraConcluida.getText();
+    public void validarCompraConcluida(){
+        Commands.validarMensagem(compraMaps.txtCompraConcluida, "Checkout: Complete!");
     }
 
 }
