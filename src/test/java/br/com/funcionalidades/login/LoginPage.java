@@ -1,8 +1,8 @@
 package br.com.funcionalidades.login;
 
-import br.com.funcionalidades.dados.MassaDados;
 import br.com.funcionalidades.compra.ProdutosMaps;
-import br.com.funcionalidades.driver.DriverNavegador;
+import br.com.funcionalidades.dados.MassaDados;
+import br.com.funcionalidades.utils.Commands;
 
 import java.io.IOException;
 
@@ -12,7 +12,6 @@ public class LoginPage {
     ProdutosMaps produtosMaps;
 
     LoginMaps loginMaps = new LoginMaps();
-    MassaDados massadados = new MassaDados();
 
     public void clickBtnLogin() {
         loginMaps.btnLogin.click();
@@ -22,51 +21,46 @@ public class LoginPage {
         loginMaps.inpUsername.click();
     }
 
-    public void setInpUsername(String username) throws IOException {
-        username = MassaDados.getUsername();
-        loginMaps.inpUsername.sendKeys(username);
+    public void setInpUsername() throws IOException {
+        String username = MassaDados.getUsername();
+        Commands.preencherCampo(loginMaps.inpUsername, username);
     }
 
-    public void setInmpUsernameBlock(String usernameBlock) throws IOException {
-        usernameBlock = MassaDados.getUsernameBlock();
-        loginMaps.inpUsername.sendKeys(usernameBlock);
+    public void setInmpUsernameBlock() throws IOException {
+        String usernameBlock = MassaDados.getUsernameBlock();
+        Commands.preencherCampo(loginMaps.inpUsername, usernameBlock);
     }
 
-    public void setInpPassword(String password) throws IOException {
-        password = MassaDados.getPassword();
-        loginMaps.inpPassword.click();
-        loginMaps.inpPassword.sendKeys(password);
+    public void setInpPassword() throws IOException {
+        String password = MassaDados.getPassword();
+        Commands.clique(loginMaps.inpPassword);
+        Commands.preencherCampo(loginMaps.inpPassword, password);
     }
 
-    public void setPasswordIncorreto(String passwordIncorreto) throws IOException {
-        passwordIncorreto = MassaDados.getPasswordIncorreto();
-        loginMaps.inpPassword.click();
-        loginMaps.inpPassword.sendKeys(passwordIncorreto);
+    public void setPasswordIncorreto() throws IOException {
+        String passwordIncorreto = MassaDados.getPasswordIncorreto();
+        Commands.clique(loginMaps.inpPassword);
+        Commands.preencherCampo(loginMaps.inpPassword, passwordIncorreto);
     }
 
-    public String getUsuarioLogado() {
+    public void validarLoginSucesso() {
         produtosMaps = new ProdutosMaps();
-        DriverNavegador.visibilityOf(produtosMaps.txtProduto);
-        return produtosMaps.txtProduto.getText();
+        Commands.validarMensagem(produtosMaps.txtProduto,"Products" );
     }
 
-    public String getErroUsername() {
-        DriverNavegador.visibilityOf(loginMaps.txtErroUsername);
-        return loginMaps.txtErroUsername.getText();
+    public void validarErroUsername() {
+        Commands.validarMensagem(loginMaps.txtErroUsername, "Epic sadface: Username is required");
     }
 
-    public String getErroPassword() {
-        DriverNavegador.visibilityOf(loginMaps.txtErroPassword);
-        return loginMaps.txtErroPassword.getText();
+    public void validarErroPassword() {
+        Commands.validarMensagem(loginMaps.txtErroPassword, "Epic sadface: Password is required");
     }
 
-    public String getErroUserBlock() {
-        DriverNavegador.visibilityOf(loginMaps.txtUserBlock);
-        return loginMaps.txtUserBlock.getText();
+    public void validarErroUsuarioBlock() {
+        Commands.validarMensagem(loginMaps.txtUserBlock, "Epic sadface: Sorry, this user has been locked out.");
     }
 
-    public String getLoginIncorreto() {
-        DriverNavegador.visibilityOf(loginMaps.txtErroLogin);
-        return loginMaps.txtErroLogin.getText();
+    public void validarLoginIncorreto() {
+        Commands.validarMensagem(loginMaps.txtErroLogin,"Epic sadface: Username and password do not match any user in this service");
     }
 }
