@@ -4,7 +4,7 @@ on:
   schedule:
     # 1° minuto(0-59) / 2° hora (0-23)/ 3° dia do mês(1-31) / 4° mês(1-12) /
     # 5° dia da semana(1-6 ou SUN-SAT)/ * signfica todos
-    - cron: '30 14 * * 1-5'
+    - cron: '00 15 * * *'
 
 jobs:
   RunTest:
